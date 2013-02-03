@@ -1,0 +1,101 @@
+#oneclickorder-form-wrapper {
+    text-align: left;
+    margin: 2px 0 10px 0;
+}
+
+#oneclickorder-form-wrapper .oneclickorder-fields{
+    text-align: right;
+    width: 196px;
+}
+
+#oneclickorder-form-wrapper form {
+    margin-top: 6px;
+    display: block;
+}
+
+
+#oneclickorder-form-wrapper input {
+    width: 30px;
+}
+
+#oneclickorder-form-wrapper .button-wrapper {
+    margin-top: 4px;
+}
+
+#oneclickorder-form-wrapper .oneclickorder-country {
+    width: 58px;
+}
+
+#oneclickorder-form-wrapper .oneclickorder-phone,
+#oneclickorder-form-wrapper .oneclickorder-email {
+    width: 110px;
+    height: 15px;
+    margin-bottom: 2px;
+
+}
+
+#oneclickorder-form-wrapper .oneclickorder-email {
+    /*margin: 2px 0 0 39px;*/
+}
+
+#oneclickorder-form-wrapper .phone-icon {
+    /*margin-top: 3px;*/
+    vertical-align:top;
+}
+
+#oneclickorder-form-wrapper .descr {
+    font-size: 10px;
+    line-height: 12px;
+}
+
+#oneclickorder-form-wrapper .oneclickorder-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#oneclickorder-form-wrapper .please-wait {
+    display: block;
+    margin-top: 5px;
+    float: none;
+}
+
+#oneclickorder-form-wrapper .checkout_cart_index {
+
+}
+
+#oneclickorder-form-wrapper .catalog_product_view {
+
+}
+
+#oneclickorder-form-wrapper .comment-toggle {
+    background: url('../images/oneclickorder/comment.png');
+    width: 17px;
+    height: 16px;
+    cursor: pointer;
+    float: left;
+    margin-top: 9px;
+}
+
+#oneclickorder-form-wrapper .comment-wrapper textarea {
+    width: 90%;
+    max-width: 178px;
+    height: 50px;
+}
+
+#oneclickorder-form-wrapper .button {
+    margin: 5px 0 0 24px;
+    float: none;
+}
+
+#oneclickorder-form-wrapper.checkout_cart_index {
+    width: 238px;
+}
+
+#oneclickorder-form-wrapper.catalog_product_view {
+    width: 195px;
+}
+
+
+#oneclickorder-form-wrapper.catalog_product_view .oneclickorder-email {
+    /*margin: 3px 0 0 36px;*/
+}

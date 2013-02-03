@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Smasoft_Oneclickorder>
+            <version>0.1.0</version>
+        </Smasoft_Oneclickorder>
+    </modules>
+    <global>
+        <helpers>
+            <smasoft_oneclickorder>
+                <class>Smasoft_Oneclickorder_Helper</class>
+            </smasoft_oneclickorder>
+        </helpers>
+        <models>
+            <smasoft_oneclickorder>
+                <class>Smasoft_Oneclickorder_Model</class>
+                <resourceModel>smasoft_oneclickorder_resources</resourceModel>
+            </smasoft_oneclickorder>
+            <smasoft_oneclickorder_resources>
+                <class>Smasoft_Oneclickorder_Model_Resource</class>
+                <entities>
+                    <order>
+                        <table>smasoft_oneclickorder_orders</table>
+                    </order>
+                    <country>
+                        <table>smasoft_oneclickorder_country</table>
+                    </country>
+                </entities>
+            </smasoft_oneclickorder_resources>
+            <sales>
+                <rewrite>
+                    <service_quote>Smasoft_Oneclickorder_Model_ServiceQuote</service_quote>
+                </rewrite>
+            </sales>
+        </models>
+        <blocks>
+            <smasoft_oneclickorder>
+                <class>Smasoft_Oneclickorder_Block</class>
+            </smasoft_oneclickorder>
+        </blocks>
+        <resources>
+            <oneclickorder_setup>
+                <setup>
+                    <module>Smasoft_Oneclickorder</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </oneclickorder_setup>
+            <oneclickorder_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </oneclickorder_write>
+            <oneclickorder_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </oneclickorder_read>
+        </resources>
+        <events>
+            <catalog_controller_product_view> <!-- identifier of the event we want to catch -->
+                <observers>
+                    <smasoft_events> <!-- identifier of the event handler -->
+                        <type>model</type>
+                        <!-- class method call type; valid are model, object and singleton -->
+                        <class>smasoft_oneclickorder/observer</class>
+                        <!-- observers class alias -->
+                        <method>test</method>
+                        <!-- observer's method to be called -->
+                        <args></args>
+                        <!-- additional arguments passed to observer -->
+                    </smasoft_events>
+                </observers>
+            </catalog_controller_product_view>
+
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <smasoft_events>
+                        <class>smasoft_oneclickorder/observer</class>
+                        <method>saveMagentoOrderId</method>
+                    </smasoft_events>
+                </observers>
+            </checkout_type_onepage_save_order_after>
+        </events>
+        <template>
+            <email>
+                <smasoft_oneclickorder_general_template_admin translate="label" module="smasoft_oneclickorder">
+                    <label>OneClick Order Admin Email template</label>
+                    <file>oneclickorder/admin_order.html</file>
+                    <type>html</type>
+                </smasoft_oneclickorder_general_template_admin>
+            </email>
+        </template>
+    </global>
+
+    <frontend>
+        <routers>
+            <smasoft_oneclickorder>
+                <use>standard</use>
+                <args>
+                    <module>Smasoft_Oneclickorder</module>
+                    <frontName>oneclickorder</frontName>
+                </args>
+            </smasoft_oneclickorder>
+        </routers>
+        <translate>
+            <modules>
+                <Smasoft_Oneclickorder>
+                    <files>
+                        <default>Smasoft_Oneclickorder.csv</default>
+                    </files>
+                </Smasoft_Oneclickorder>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <smasoft_oneclickorder>
+                    <file>smasoft/oneclickorder.xml</file>
+                </smasoft_oneclickorder>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <smasoft_oneclickorder>
+                    <file>smasoft/oneclickorder.xml</file>
+                </smasoft_oneclickorder>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Smasoft_Oneclickorder>
+                    <files>
+                        <default>Smasoft_Oneclickorder.csv</default>
+                    </files>
+                </Smasoft_Oneclickorder>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <smasoft_oneclickorder before="Mage_Adminhtml">Smasoft_Oneclickorder_Adminhtml</smasoft_oneclickorder>
+                    </modules>
+                </args>
+            </adminhtml>
+
+        </routers>
+    </admin>
+
+    <default>
+        <smasoft_oneclickorder>
+            <general>
+                <create_magento_order>1</create_magento_order>
+                <enabled>1</enabled>
+                <send_email>1</send_email>
+                <template_admin>smasoft_oneclickorder_general_template_admin</template_admin>
+                <allow_countries>US,GB,UA,RU</allow_countries>
+            </general>
+        </smasoft_oneclickorder>
+    </default>
+
+</config> 

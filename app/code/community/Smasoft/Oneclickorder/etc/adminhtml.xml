@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <sales>
+            <children>
+                <oneclick_order translate="title" module="smasoft_oneclickorder">
+                    <title>One Click Order</title>
+                    <action>adminhtml/oneclickorder/index</action>
+                    <sort_order>11</sort_order>
+                </oneclick_order>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <oneclick_order translate="title">
+                                <title>One Click Order</title>
+                                <children>
+                                    <grid translate="title">
+                                        <title>Grid</title>
+                                    </grid>
+                                    <view translate="title">
+                                        <title>View</title>
+                                    </view>
+                                </children>
+                            </oneclick_order>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <smasoft_oneclickorder translate="title" module="smasoft_oneclickorder">
+                                        <title>One Click Order Settings</title>
+                                    </smasoft_oneclickorder>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

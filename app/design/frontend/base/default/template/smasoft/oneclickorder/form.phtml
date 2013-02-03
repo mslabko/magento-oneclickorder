@@ -1,0 +1,102 @@
+<?php
+/** @var $this Smasoft_Oneclickorder_Block_Form */
+/** @var $helper Smasoft_Oneclickorder_Helper_Data */
+$helper = Mage::helper('smasoft_oneclickorder');
+
+?>
+
+<div id="oneclickorder-form-wrapper" class="<?php echo $this->getAction()->getFullActionName()?>">
+    <div class="oneclickorder-title"><?php echo $this->__('1 Click Order')?></div>
+    <div class="descr">
+        <?php echo $this->__('Manager will call you, knows all details and will help place your order.')?>
+    </div>
+    <form id="oneclickorder-form" action="<?php echo $this->getUrl('oneclickorder/index/saveOrder')?>" method="post">
+        <div class="oneclickorder-fields">
+            <img class="phone-icon" src="<?php echo $this->getSkinUrl('images/oneclickorder/telephone.png') ?>"/>
+            <?php echo $this->getPhoneCodeHtml('oneclickorder[country]', 'validate-select oneclickorder-country', true, $helper->__('Code'))?>
+            <input type="text" name="oneclickorder[phone]" class="required-entry oneclickorder-phone"  placeholder="<?php echo $this->__('phone number')?>"/>
+            <?php if ($this->isShowEmailField()): ?>
+            <input type="text" name="oneclickorder[email]" class="required-entry validate-email oneclickorder-email"  placeholder="<?php echo $this->__('email')?>"/>
+            <?php endif; ?>
+            <div class="comment-wrapper" id="oneclickorder-comment-wrapper" style="display: none;">
+                <span class="comment"><?php echo $helper->__('Comment:')?></span>
+                <textarea name="oneclickorder[comment]"></textarea>
+            </div>
+        </div>
+        <div class="button-wrapper" id="oneclickorder-buttons-container">
+            <div class="comment-toggle" title="<?php echo $this->__('Add comment')?>">&nbsp;</div>
+            <button type="button" class="button" name="submitOneclickOrder" onclick="oneClickOrder.saveOrder()"/>
+                <span><span><?php echo $this->__('Place Order')?></span></span>
+            </button>
+        </div>
+        <span class="please-wait" id="oneclickorder-please-wait" style="display:none;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $helper->__('Submit Order...') ?>" title="<?php echo $helper->__('Submit Order...') ?>" class="v-middle" /> <?php echo $helper->__('Submit Order...') ?>
+        </span>
+    </form>
+
+</div>
+<script type="text/javascript">
+
+    var oneClickOrder = {
+        formInstance:new VarienForm('oneclickorder-form'),
+
+        _processResponse:function (response) {
+            if (response.error) {
+                Element.hide('oneclickorder-please-wait');
+                Element.show('oneclickorder-buttons-container');
+                $('oneclickorder-buttons-container').descendants().each(function(s) {
+                    s.disabled = false;
+                });
+                alert(response.error);
+                return false;
+            }
+            if (response.success) {
+                if (response.message) {
+                    alert(response.message)
+                }
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                }
+            }
+            return true;
+        },
+        _afterSaveOrder:function (transport) {
+            var response = {};
+            try {
+                response = transport.responseText.evalJSON();
+            } catch (e) {
+                response = transport.responseText;
+            }
+            if (this._processResponse(response)) {
+
+            }
+        },
+        saveOrder:function () {
+            if (this.formInstance.validator && this.formInstance.validator.validate()) {
+
+                Element.show('oneclickorder-please-wait');
+                Element.hide('oneclickorder-buttons-container');
+                $('oneclickorder-buttons-container').descendants().each(function(s) {
+                    s.disabled = true;
+                });
+
+                new Ajax.Request(this.formInstance.form.getAttribute('action'), {
+                    method:'post',
+                    parameters:this.formInstance.form.serialize(),
+                    onComplete:this._afterSaveOrder.bind(this),
+                    onFailure:function () {
+                        location.href = BASE_URL;
+                    }
+                });
+            }
+        },
+        toggleCommentBlock:function (event) {
+            Element.toggle('oneclickorder-comment-wrapper');
+        }
+    };
+
+    $$("#oneclickorder-form-wrapper .comment-toggle").invoke('observe', 'click', function () {
+        oneClickOrder.toggleCommentBlock(this)
+    });
+
+</script>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<layout>
+
+    <adminhtml_oneclickorder_index>
+        <reference name="content">
+            <block type="smasoft_oneclickorder/adminhtml_orders" name="oneclickorder_orders_index"/>
+        </reference>
+    </adminhtml_oneclickorder_index>
+
+    <adminhtml_oneclickorder_view>
+        <reference name="content">
+            <block type="smasoft_oneclickorder/adminhtml_orders_view" name="sales_order_edit"/>
+        </reference>
+        <reference name="left">
+            <block type="smasoft_oneclickorder/adminhtml_orders_view_tabs" name="sales_order_tabs">
+                <block type="smasoft_oneclickorder/adminhtml_orders_view_tab_view" name="order_tab_info"
+                       template="smasoft/oneclickorder/view.phtml">
+                    <block type="smasoft_oneclickorder/adminhtml_orders_view_totals" name="order_totals"
+                           template="sales/order/totals.phtml"/>
+                </block>
+                <action method="addTab">
+                    <name>order_info</name>
+                    <block>order_tab_info</block>
+                </action>
+                <action method="addTab">
+                    <name>order_items</name>
+                    <block>smasoft_oneclickorder/adminhtml_orders_view_tab_cart</block>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_oneclickorder_view>
+
+</layout>

@@ -1,0 +1,26 @@
+<?php
+    /** @var $this Smasoft_Oneclickorder_Block_Success */
+    ?>
+
+<?php
+    if ($this->isShowMagentoOrderSuccess()) :
+        echo $this->getChildHtml('magento_order_success');
+    else :
+?>
+
+    <div class="page-title">
+        <h1><?php echo $this->__('Your order has been received.') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+    <?php if ($this->getOrderId()) : ?>
+    <p><?php echo $this->__('Your order # is: %s. Manager will call you to %s', $this->getOrderId(), $this->getPhoneNumber()) ?></p>
+    <?php endif; ?>
+    <div class="buttons-set">
+        <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>"
+                onclick="window.location.href = '<?php echo $this->getUrl() ?>'">
+            <span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    </div>
+
+    <?php endif; ?>

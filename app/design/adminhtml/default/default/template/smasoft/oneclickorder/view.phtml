@@ -1,0 +1,205 @@
+
+<?php /** @var $this Smasoft_Oneclickorder_Block_Adminhtml_Orders_View_Tab_View */ ?>
+<?php
+$_order = $this->getOrder();
+$helper = $this->getHelper();
+$customer = $_order->getCustomer();
+?>
+<?php
+$orderAdminDate = $this->formatDate($_order->getCreateDate(), 'medium', true);
+$orderStoreDate = $this->formatDate($_order->getCreatedAtStoreDate(), 'medium', true);
+?>
+<div class="box-left">
+    <!--Order Information-->
+    <div class="entry-edit">
+
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Order # %s', $_order->getEntityId()) ?></h4>
+        </div>
+        <div class="fieldset">
+            <table cellspacing="0" class="form-list">
+                <?php if ($_order->getMagentoOrderId()):?>
+                <tr>
+                    <td class="label"><label><?php echo $helper->__('View Magento Order') ?></label></td>
+                    <td class="value"><strong>
+                        <a href="<?php echo $this->getMagentoOrderUrl($_order->getMagentoOrderId()) ?>"><?php echo Mage::helper('sales')->__('Order # %s', $_order->getMagentoOrderId()) ?></a>
+                    </strong></td>
+                </tr>
+                <?php endif;?>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date') ?></label></td>
+                    <td class="value"><strong><?php echo $orderAdminDate ?></strong></td>
+                </tr>
+                <?php if ($orderAdminDate != $orderStoreDate):?>
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date (%s)', $_order->getCreatedAtStoreDate()->getTimezone()) ?></label></td>
+                    <td class="value"><strong><?php echo $orderStoreDate ?></strong></td>
+                </tr>
+                <?php endif;?>
+<!--                <tr>-->
+<!--                    <td class="label"><label>--><?php //echo Mage::helper('sales')->__('Order Status') ?><!--</label></td>-->
+<!--                    <td class="value"><strong><span id="order_status">--><?php //echo $_order->getStatusLabel() ?><!--</span></strong></td>-->
+<!--                </tr>-->
+                <tr>
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Purchased From') ?></label></td>
+                    <td class="value"><strong><?php echo $this->getOrderStoreName() ?></strong></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="box-right">
+    <!--Account Information-->
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Account Information') ?></h4>
+        </div>
+        <div class="fieldset">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list">
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('sales')->__('Customer Name') ?></label></td>
+                        <td class="value">
+                            <?php if (!$customer->getIsGuest() && ($_customerUrl=$this->getUrl('*/customer/edit', array('id' => $customer->getId())))) : ?>
+                            <a href="<?php echo $_customerUrl ?>" target="_blank"><strong><?php echo $customer->getName() ?></strong></a>
+                            <?php else: ?>
+                            <strong><?php echo Mage::helper('customer')->__('Guest') ?></strong>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php if (!$customer->getIsGuest()):?>
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('sales')->__('Email') ?></label></td>
+                        <td class="value"><a href="mailto:<?php echo $customer->getEmail() ?>"><strong><?php echo $customer->getEmail() ?></strong></a></td>
+                    </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <td class="label"><label><?php echo $helper->__('Phone') ?></label></td>
+                        <td class="value"><strong><?php echo $_order->getFullPhoneNumber()?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label><?php echo $helper->__('Comment') ?></label></td>
+                        <td class="value"><strong><?php echo $this->escapeHtml($_order->getComment())?></strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+<div class="box-right entry-edit">
+    <div class="entry-edit-head"><h4><?php echo Mage::helper('sales')->__('Order Totals') ?></h4></div>
+    <div class="order-totals"><?php echo $this->getChildHtml('order_totals') ?></div>
+</div>
+<?php
+
+//$this->getChildHtml('order_items');
+/* ?>
+
+
+<div>
+    <div id="order-messages">
+        <?php echo $this->getChildHtml('order_messages') ?>
+    </div>
+    <?php echo $this->getChildHtml('order_info') ?>
+    <input type="hidden" name="order_id" value="<?php echo $_order->getId() ?>"/>
+    <?php if ($_order->getIsVirtual()): ?>
+    <div class="box-right">
+    <?php else: ?>
+    <div class="box-left">
+    <?php endif; ?>
+    <!--Payment Method-->
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-payment-method"><?php echo Mage::helper('sales')->__('Payment Information') ?></h4>
+        </div>
+        <fieldset>
+            <?php echo $this->getPaymentHtml() ?>
+            <div><?php echo Mage::helper('sales')->__('Order was placed using %s', $_order->getOrderCurrencyCode()) ?></div>
+        </fieldset>
+    </div>
+</div>
+    <?php if (!$_order->getIsVirtual()): ?>
+    <div class="box-right">
+        <!--Shipping Method-->
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-shipping-method"><?php echo Mage::helper('sales')->__('Shipping &amp; Handling Information') ?></h4>
+            </div>
+            <fieldset>
+                <?php  if ($_order->getTracksCollection()->count()) : ?>
+                <a href="#" id="linkId" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_order) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')" title="<?php echo $this->__('Track Order') ?>"><?php echo $this->__('Track Order') ?></a>
+                <br/>
+                <?php endif; ?>
+                <?php if ($_order->getShippingDescription()): ?>
+                <strong><?php echo $this->escapeHtml($_order->getShippingDescription()) ?></strong>
+
+                <?php if ($this->helper('tax')->displayShippingPriceIncludingTax()): ?>
+                    <?php $_excl = $this->displayShippingPriceInclTax($_order); ?>
+                    <?php else: ?>
+                    <?php $_excl = $this->displayPriceAttribute('shipping_amount', false, ' '); ?>
+                    <?php endif; ?>
+                <?php $_incl = $this->displayShippingPriceInclTax($_order); ?>
+
+                <?php echo $_excl; ?>
+                <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                    (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                    <?php endif; ?>
+                <?php else: ?>
+                <?php echo $this->helper('sales')->__('No shipping information available'); ?>
+                <?php endif; ?>
+            </fieldset>
+        </div>
+    </div>
+    <?php endif; ?>
+    <div class="clear"></div>
+    <?php echo $this->getGiftOptionsHtml() ?>
+    <div class="clear"></div>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-products"><?php echo Mage::helper('sales')->__('Items Ordered') ?></h4>
+        </div>
+    </div>
+    <?php echo $this->getItemsHtml() ?>
+    <div class="clear"></div>
+
+    <div class="box-left">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
+            </div>
+            <fieldset><?php echo $this->getChildHtml('order_history') ?></fieldset>
+        </div>
+    </div>
+    <div class="box-right entry-edit">
+        <div class="entry-edit-head"><h4><?php echo Mage::helper('sales')->__('Order Totals') ?></h4></div>
+        <div class="order-totals"><?php echo $this->getChildHtml('order_totals') ?></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+    <?php echo $this->getChildHtml('popup_window');?>
+    <script type="text/javascript">
+
+        function getGiftOptionsTooltipContent(itemId) {
+            var contentLines = [];
+            var headerLine = null;
+            var contentLine = null;
+
+            $$('#gift_options_data_' + itemId + ' .gift-options-tooltip-content').each(function (element) {
+                if (element.down(0)) {
+                    headerLine = element.down(0).innerHTML;
+                    contentLine = element.down(0).next().innerHTML;
+                    if (contentLine.length > 30) {
+                        contentLine = contentLine.slice(0,30) + '...';
+                    }
+                    contentLines.push(headerLine + ' ' + contentLine);
+                }
+            });
+            return contentLines.join('<br/>');
+        }
+        giftOptionsTooltip.setTooltipContentLoaderFunction(getGiftOptionsTooltipContent);
+        //]]>
+    </script>
+*/

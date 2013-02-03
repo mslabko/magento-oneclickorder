@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<config>
+    <sections>
+        <smasoft_oneclickorder translate="label" module="smasoft_oneclickorder">
+            <class>separator-top</class>
+            <label>One Click Order</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>One Click Order General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <expanded>1</expanded>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <create_magento_order translate="label comment">
+                            <label>Create Magento Order</label>
+                            <comment>Controls whether create Magento Order if possible.
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </create_magento_order>
+                        <send_email translate="label">
+                            <label>Send Email with order info</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </send_email>
+                        <email translate="label comment">
+                            <label>Email Address</label>
+                            <comment>By default uses General Store Email [General=>Store Email Addresses=>General
+                                Contact]
+                            </comment>
+                            <depends>
+                                <send_email>1</send_email>
+                            </depends>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <validate>validate-email</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email>
+                        <template_admin translate="label">
+                            <label>Admin Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template_admin>
+                        <allow_countries translate="label comment">
+                            <label>Allow Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>smasoft_oneclickorder/system_config_source_country</source_model>
+                            <comment>If select more, than one option, on frontend will be shown select-box with selected
+                                phone codes
+                            </comment>
+                            <sort_order>6</sort_order>
+                            <validate>required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </allow_countries>
+                    </fields>
+                </general>
+            </groups>
+        </smasoft_oneclickorder>
+    </sections>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Smasoft_Oneclickorder>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Adminhtml/>
+                <Mage_Catalog />
+                <Mage_Checkout/>
+            </depends>
+            <version>0.1.0</version>
+        </Smasoft_Oneclickorder>
+    </modules>
+</config>
