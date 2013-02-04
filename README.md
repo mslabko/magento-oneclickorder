@@ -1,7 +1,7 @@
 Magento One Click Order
 =====================
 
-This extension allows your customers only in one click to place order, by entering only phone number.
+This extension allows your customers to place order only in one click , by entering the phone number.
 On the Product View page (right column) and Cart View page will appear form "1 Click order"
 
 
@@ -11,7 +11,7 @@ Features:
 - Ability to view order history in admin
 - Save order in Magento [optional]
 - Send notification to admin by email [optional]
-- Disable expansion
+- Disable extension
 - ajax form submit
 
 Installation:
