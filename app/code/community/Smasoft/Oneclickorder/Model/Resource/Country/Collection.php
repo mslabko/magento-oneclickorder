@@ -13,8 +13,10 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-
-class Smasoft_Oneclickorder_Model_Resource_Country_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
+/**
+ *  extend Mage_Core_Model_Mysql4_Collection_Abstract for compatibility with old version
+ */
+class Smasoft_Oneclickorder_Model_Resource_Country_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
     /**
      * Define resource model

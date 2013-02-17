@@ -14,7 +14,10 @@
  */
 
 
-class Smasoft_Oneclickorder_Model_Resource_Order extends Mage_Core_Model_Resource_Db_Abstract
+/**
+ * use Mage_Core_Model_Mysql4_Abstract for compatibility with old versions
+ */
+class Smasoft_Oneclickorder_Model_Resource_Order extends Mage_Core_Model_Mysql4_Abstract
 {
 
     /**

@@ -14,7 +14,7 @@
  */
 
 
-class Smasoft_Oneclickorder_Model_Resource_Order_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
+class Smasoft_Oneclickorder_Model_Resource_Order_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
     /**
      * Define resource model
@@ -43,8 +43,8 @@ class Smasoft_Oneclickorder_Model_Resource_Order_Collection extends Mage_Core_Mo
             } else {
                 $table = $entityTable . '_' . $attribute->getBackendType(); //customer_entity_varchar
             }
-            $tableAlias = $table . '_' . $attributeCode;
-            $this->getSelect()->joinLeft(array($tableAlias => $table),
+            $tableAlias = "$table";
+            $this->getSelect()->joinLeft($table,
                 'main_table.customer_id = ' . $tableAlias . '.entity_id and ' . $tableAlias . '.attribute_id = ' . $attribute->getAttributeId(),
                 array($attributeCode => $tableAlias . '.value')
             );

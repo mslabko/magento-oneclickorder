@@ -50,7 +50,7 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         $onepage = $this->getOnepage();
         try {
             $onepage->savePayment(array(
-                'method' => 'checkmo',
+                'method' => 'smasoft_oneclickorder',
             ));
             $onepage->getQuote()->collectTotals()->save();
             Mage::register('oneclickorder_ignore_quote_validation', true, true);
@@ -75,7 +75,7 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         $model->setCustomerId($this->_getCustomer()->getId());
         $model->setQuoteId($this->getOnepage()->getQuote()->getId());
         $model->setStoreId(Mage::app()->getStore()->getId());
-        $model->setCreateDate(Mage::getModel('core/date')->timestamp(time()));
+        $model->setCreateDate(date('Y-m-d h:i:s'));
         $model->save();
         Mage::register('oneclickorder_order_instance', $model, true);
 // save for Guest

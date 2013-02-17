@@ -83,6 +83,24 @@
                     </smasoft_events>
                 </observers>
             </checkout_type_onepage_save_order_after>
+
+            <controller_action_layout_generate_blocks_after>
+                <observers>
+                    <smasoft_events>
+                        <class>smasoft_oneclickorder/observer</class>
+                        <method>changeOnepageCheckout</method>
+                    </smasoft_events>
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+
+            <controller_action_predispatch_checkout_onepage_index>
+                <observers>
+                    <smasoft_events>
+                        <class>smasoft_oneclickorder/observer</class>
+                        <method>changeOnepageCheckout</method>
+                    </smasoft_events>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_index>
         </events>
         <template>
             <email>
@@ -160,11 +178,25 @@
             <general>
                 <create_magento_order>1</create_magento_order>
                 <enabled>1</enabled>
-                <send_email>1</send_email>
+                <send_email>0</send_email>
                 <template_admin>smasoft_oneclickorder_general_template_admin</template_admin>
                 <allow_countries>US,GB,UA,RU</allow_countries>
             </general>
+            <checkout>
+                <change_onepage>0</change_onepage>
+            </checkout>
         </smasoft_oneclickorder>
+
+    <payment>
+        <smasoft_oneclickorder>
+            <active>1</active>
+            <model>smasoft_oneclickorder/payment_method_oneclick</model>
+            <order_status>pending</order_status>
+            <title>OneClick Order Dummy Payment Method</title>
+            <allowspecific>0</allowspecific>
+            <group>offline</group>
+        </smasoft_oneclickorder>
+    </payment>
     </default>
 
-</config> 
+</config>

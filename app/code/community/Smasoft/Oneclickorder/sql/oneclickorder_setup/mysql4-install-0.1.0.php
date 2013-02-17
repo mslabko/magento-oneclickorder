@@ -18,116 +18,38 @@ $installer = $this;
 
 $installer->startSetup();
 
-/**
- * Create table 'phone codes'
- */
-$table = $installer->getConnection()
-    ->newTable($installer->getTable('smasoft_oneclickorder/country'))
-    ->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'identity' => true,
-    'unsigned' => true,
-    'nullable' => false,
-    'primary' => true,
-), 'Entity ID')
-    ->addColumn('phone_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 9, array(
-    'nullable' => false,
-    'default' => null,
-), 'Phone Code')
+    $installer->run("
+    DROP TABLE IF EXISTS  `{$installer->getTable('smasoft_oneclickorder/country')}`;
+    CREATE TABLE `{$installer->getTable('smasoft_oneclickorder/country')}` (
+       `entity_id` int(10) unsigned NOT NULL auto_increment,
+       `phone_code` varchar(9) NOT NULL default '',
+       `country_code` varchar(9) NOT NULL default '',
+       `order` tinyint(4) default '0',
+       PRIMARY KEY  (`entity_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-    ->addColumn('country_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 4, array(
-    'nullable' => false,
-    'default' => null,
-), 'Country Code')
+    INSERT INTO  `{$installer->getTable('smasoft_oneclickorder/country')}` (`phone_code`, `country_code`,`order`)
+        VALUES ('380', 'UA', 1);
+    INSERT INTO  `{$installer->getTable('smasoft_oneclickorder/country')}` (`phone_code`, `country_code`, `order`)
+        VALUES ('7', 'RU', 2);
+    INSERT INTO  `{$installer->getTable('smasoft_oneclickorder/country')}` (`phone_code`, `country_code`, `order`)
+        VALUES ('1', 'US', 3);
+    INSERT INTO  `{$installer->getTable('smasoft_oneclickorder/country')}` (`phone_code`, `country_code`,`order`)
+        VALUES ('44', 'GB', 4);
 
-    ->addColumn('order', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array(
-    'nullable' => false,
-    'default' => 0,
-), 'Order');
-
-$installer->getConnection()->createTable($table);
-
-
-$insertData = array(
-    array(
-        'phone_code' => '380',
-        'country_code' => 'UA',
-        'order' => 1
-    ),
-    array(
-        'phone_code' => '7',
-        'country_code' => 'RU',
-        'order' => 2
-    ),
-    array(
-        'phone_code' => '1',
-        'country_code' => 'US',
-        'order' => 3
-    ),
-    array(
-        'phone_code' => '44',
-        'country_code' => 'GB',
-        'order' => 4
-    ),
-
-);
-
-foreach ($insertData as $data) {
-    $installer->getConnection()->insert($installer->getTable('smasoft_oneclickorder/country'), $data);
-}
-
-
-/**
- * Create table 'order'
- */
-$table = $installer->getConnection()
-    ->newTable($installer->getTable('smasoft_oneclickorder/order'))
-    ->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'identity' => true,
-    'unsigned' => true,
-    'nullable' => false,
-    'primary' => true,
-), 'Entity ID')
-
-    ->addColumn('magento_order_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'unsigned' => true,
-    'nullable' => true,
-), 'Magento Order Id')
-
-    ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'unsigned' => true,
-    'nullable' => true,
-), 'Customer Id')
-
-    ->addColumn('quote_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'unsigned' => true,
-    'nullable' => true,
-), 'Quote Id')
-
-    ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-    'unsigned' => true,
-    'nullable' => false,
-), 'Store Id')
-
-    ->addColumn('phone', Varien_Db_Ddl_Table::TYPE_VARCHAR, 40, array(
-    'nullable' => false,
-), 'Phone number')
-
-
-    ->addColumn('country', Varien_Db_Ddl_Table::TYPE_VARCHAR, 4, array(
-    'nullable' => false,
-), 'Country code')
-
-    ->addColumn('comment', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
-    'nullable' => true,
-), 'Comment')
-
-    ->addColumn('create_date', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
-    'default' => 'CURRENT_TIMESTAMP',
-    'nullable' => false,
-), 'Create date');
-$installer->getConnection()->createTable($table);
-
-
-$installer->run($sql);
+    DROP TABLE IF EXISTS  `{$installer->getTable('smasoft_oneclickorder/order')}`;
+    CREATE TABLE `{$installer->getTable('smasoft_oneclickorder/order')}` (
+       `entity_id` int(10) unsigned NOT NULL auto_increment,
+       `magento_order_id` int(10) unsigned,
+       `customer_id` int(10) unsigned,
+       `quote_id` int(10) unsigned,
+       `store_id` int(10) unsigned  NOT NULL,
+       `phone` varchar(40) NOT NULL default '',
+       `country` varchar(4) NOT NULL default '',
+       `comment` text,
+       `create_date` datetime NOT NULL,
+       PRIMARY KEY  (`entity_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+");
 
 $installer->endSetup();

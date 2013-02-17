@@ -5,7 +5,8 @@
 
 #oneclickorder-form-wrapper .oneclickorder-fields{
     text-align: right;
-    width: 196px;
+    /*width: 196px;*/
+    width: 98%;
 }
 
 #oneclickorder-form-wrapper form {
@@ -28,7 +29,8 @@
 
 #oneclickorder-form-wrapper .oneclickorder-phone,
 #oneclickorder-form-wrapper .oneclickorder-email {
-    width: 110px;
+    /*width: 110px;*/
+    width: 63%;
     height: 15px;
     margin-bottom: 2px;
 
@@ -73,7 +75,8 @@
     height: 16px;
     cursor: pointer;
     float: left;
-    margin-top: 9px;
+    margin-top: 2px;
+    margin-right: 4px;
 }
 
 #oneclickorder-form-wrapper .comment-wrapper textarea {
@@ -83,19 +86,11 @@
 }
 
 #oneclickorder-form-wrapper .button {
-    margin: 5px 0 0 24px;
-    float: none;
-}
-
-#oneclickorder-form-wrapper.checkout_cart_index {
-    width: 238px;
+    /*margin: 5px 0 0 24px;*/
+    /*float: none;*/
 }
 
 #oneclickorder-form-wrapper.catalog_product_view {
     width: 195px;
 }
 
-
-#oneclickorder-form-wrapper.catalog_product_view .oneclickorder-email {
-    /*margin: 3px 0 0 36px;*/
-}

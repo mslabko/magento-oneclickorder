@@ -22,8 +22,10 @@ class Smasoft_Oneclickorder_Model_System_Config_Source_Country
     {
         if (!$this->_options) {
             /** @var $codesCollection Smasoft_Oneclickorder_Model_System_Config_Source_Country */
+//          comp for < 1.6
+            $alias = '`directory/country`';
             $codesCollection = Mage::getResourceModel('smasoft_oneclickorder/country_collection');
-            $codesCollection->join(array('c' => 'directory/country'), 'c.country_id = main_table.country_code');
+            $codesCollection->join('directory/country', "$alias.country_id = main_table.country_code");
             $codesCollection->setOrder('main_table.order', Varien_Data_Collection::SORT_ORDER_ASC);
             $this->_options = $codesCollection->toOptionArray();
         }

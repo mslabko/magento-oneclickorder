@@ -14,17 +14,29 @@
  */
 
 
-class Smasoft_Oneclickorder_Model_Resource_Country extends Mage_Core_Model_Mysql4_Abstract
+/**
+ * Dummy oneclick order payment method model
+ */
+class Smasoft_Oneclickorder_Model_Payment_Method_Oneclick extends Mage_Payment_Model_Method_Abstract
 {
 
+    protected $_canUseCheckout = false;
+
     /**
-     * Initialize resource model
+     * Payment method code
      *
+     * @var string
      */
-    protected function _construct()
+    protected $_code = 'smasoft_oneclickorder';
+
+    public function canUseForCountry($country)
     {
-        $this->_init('smasoft_oneclickorder/country', 'entity_id');
+        return true;
     }
 
+    public function isAvailable($quote = null)
+    {
+        return true;
+    }
 
 }

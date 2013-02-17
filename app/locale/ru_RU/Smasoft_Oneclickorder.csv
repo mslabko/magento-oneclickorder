@@ -1,15 +1,8 @@
 "1 Click Order","Заказ в 1 Клик"
 "Admin Email Template","Админ шаблон для Заказы в 1 Клик"
-"By default uses General Store Email [General=>Store Email Addresses=>General
-                                Contact]
-                            ","По умолчанию используется основной адрес магазина [Общие=>Адреса магазина=>Основной адрес]
-                            "
-"Controls whether create Magento Order if possible.
-                            ","Надо ли сохранять заказ в Magento"
+"By default uses General Store Email [General=>Store Email Addresses=>General Contact]","По умолчанию используется основной адрес магазина [Общие=>Адреса магазина=>Основной адрес]"
 "Create Magento Order","Создавать заказ в Magento"
-"If select more, than one option, on frontend will be shown select-box with selected
-                                phone codes
-                            ","Отображаемый список кодов на витрине"
+"If select more, than one option, on frontend will be shown select-box with selected phone codes","Отображаемый список кодов на витрине"
 "One Click Order General Settings","Заказы в 1 Клик. Общие настройки"
 "Send Email with order info","Отправлять email администратору о заказе"
 "Code","Код"
@@ -25,3 +18,9 @@
 "OneClick Order Admin Email template","Админ шаблон для Заказы в 1 Клик"
 "View Magento Order","Перейти к заказу в Magento"
 "Email Address","Email адрес"
+"Order Now","Заказать"
+"Change standard One Page Checkout","Заменить стандартное оформление заказа"
+"If yes, than standard One Page Checkout will be replaced by One Click Order","Если включено, то стандартный чекаут не будет доступен"
+"One Click Order Checkout Settings","Настройки оформления заказа в 1 клик."
+"Total items","Total items"
+"Controls whether create Magento Order if possible.","Если включено, то будет сохранен заказ в Magento"

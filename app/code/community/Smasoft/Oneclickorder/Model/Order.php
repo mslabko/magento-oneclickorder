@@ -99,7 +99,7 @@ class Smasoft_Oneclickorder_Model_Order extends Mage_Core_Model_Abstract
     {
         return Mage::app()->getLocale()->storeDate(
             $this->getStoreId(),
-            Varien_Date::toTimestamp($this->getCreateDate()),
+            strtotime($this->getCreateDate()),
             true
         );
     }

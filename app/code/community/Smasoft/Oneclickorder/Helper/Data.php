@@ -19,6 +19,7 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_CREATE_MAGENTO_ORDER = 'smasoft_oneclickorder/general/create_magento_order';
     const XML_PATH_SEND_EMAIL = 'smasoft_oneclickorder/general/send_email';
     const XML_PATH_EMAIL = 'smasoft_oneclickorder/general/email';
+    const XML_PATH_CHANGE_ONEPAGE_CHECKOUT = 'smasoft_oneclickorder/checkout/change_onepage';
     const XML_PATH_ALLOW_COUNTRIES = 'smasoft_oneclickorder/general/allow_countries';
 
     /**
@@ -28,6 +29,15 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
     public function isEnabled()
     {
         return Mage::getStoreConfigFlag(self::XML_PATH_ENABLED);
+    }
+
+    /**
+     * change onepage checkout with OneClick Order
+     * @return bool
+     */
+    public function isChangeOnepageCheckout()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_CHANGE_ONEPAGE_CHECKOUT);
     }
 
     /**

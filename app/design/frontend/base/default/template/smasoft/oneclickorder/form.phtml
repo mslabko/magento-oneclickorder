@@ -2,6 +2,7 @@
 /** @var $this Smasoft_Oneclickorder_Block_Form */
 /** @var $helper Smasoft_Oneclickorder_Helper_Data */
 $helper = Mage::helper('smasoft_oneclickorder');
+$action = $this->getAction()->getFullActionName();
 
 ?>
 
@@ -25,8 +26,8 @@ $helper = Mage::helper('smasoft_oneclickorder');
         </div>
         <div class="button-wrapper" id="oneclickorder-buttons-container">
             <div class="comment-toggle" title="<?php echo $this->__('Add comment')?>">&nbsp;</div>
-            <button type="button" class="button" name="submitOneclickOrder" onclick="oneClickOrder.saveOrder()"/>
-                <span><span><?php echo $this->__('Place Order')?></span></span>
+            <button type="button" class="button <?php echo $action=='checkout_cart_index' ? 'btn-proceed-checkout btn-checkout' : ''?>" name="submitOneclickOrder" onclick="oneClickOrder.saveOrder()"/>
+                <span><span><?php echo $this->__('Order Now')?></span></span>
             </button>
         </div>
         <span class="please-wait" id="oneclickorder-please-wait" style="display:none;">

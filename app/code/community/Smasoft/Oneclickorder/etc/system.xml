@@ -32,8 +32,7 @@
                         </enabled>
                         <create_magento_order translate="label comment">
                             <label>Create Magento Order</label>
-                            <comment>Controls whether create Magento Order if possible.
-                            </comment>
+                            <comment>Controls whether create Magento Order if possible.</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>2</sort_order>
@@ -52,9 +51,7 @@
                         </send_email>
                         <email translate="label comment">
                             <label>Email Address</label>
-                            <comment>By default uses General Store Email [General=>Store Email Addresses=>General
-                                Contact]
-                            </comment>
+                            <comment>By default uses General Store Email [General=>Store Email Addresses=>General Contact]</comment>
                             <depends>
                                 <send_email>1</send_email>
                             </depends>
@@ -78,9 +75,7 @@
                             <label>Allow Countries</label>
                             <frontend_type>multiselect</frontend_type>
                             <source_model>smasoft_oneclickorder/system_config_source_country</source_model>
-                            <comment>If select more, than one option, on frontend will be shown select-box with selected
-                                phone codes
-                            </comment>
+                            <comment>If select more, than one option, on frontend will be shown select-box with selected phone codes</comment>
                             <sort_order>6</sort_order>
                             <validate>required-entry</validate>
                             <show_in_default>1</show_in_default>
@@ -90,7 +85,54 @@
                         </allow_countries>
                     </fields>
                 </general>
+                <checkout translate="label">
+                    <label>One Click Order Checkout Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <expanded>1</expanded>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <change_onepage translate="label comment">
+                            <label>Change standard One Page Checkout</label>
+                            <comment>If yes, than standard One Page Checkout will be replaced by One Click Order</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </change_onepage>
+                    </fields>
+                </checkout>
             </groups>
         </smasoft_oneclickorder>
+    <payment>
+        <groups>
+
+            <smasoft_oneclickorder translate="label">
+                <label>OneClick Order Payment</label>
+                <comment>This is a system payment method for One Click Order, that cannot be use on front-end</comment>
+                <frontend_type>text</frontend_type>
+                <sort_order>30</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <fields>
+                    <order_status translate="label">
+                        <label>New Order Status</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                        <sort_order>20</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </order_status>
+                </fields>
+            </smasoft_oneclickorder>
+        </groups>
+    </payment>
+
     </sections>
 </config>
