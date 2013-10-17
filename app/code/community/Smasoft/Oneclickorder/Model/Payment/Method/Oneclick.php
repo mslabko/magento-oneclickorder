@@ -19,7 +19,6 @@
  */
 class Smasoft_Oneclickorder_Model_Payment_Method_Oneclick extends Mage_Payment_Model_Method_Abstract
 {
-
     protected $_canUseCheckout = false;
 
     /**
@@ -29,14 +28,27 @@ class Smasoft_Oneclickorder_Model_Payment_Method_Oneclick extends Mage_Payment_M
      */
     protected $_code = 'smasoft_oneclickorder';
 
+    /**
+     * @inheritdoc
+     */
     public function canUseForCountry($country)
     {
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function isAvailable($quote = null)
     {
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function isApplicableToQuote($quote, $checksBitMask)
+    {
+        return true;
+    }
 }

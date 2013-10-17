@@ -20,9 +20,7 @@
  */
 class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_Action
 {
-
     protected $_errors = array();
-
 
     /**
      * @return Mage_Checkout_OnepageController
@@ -138,6 +136,11 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         return !(bool)count($this->_errors);
     }
 
+    /**
+     * Filter data
+     *
+     * @param array $data
+     */
     protected function _filterInput($data)
     {
         foreach ($data as &$v) {
@@ -155,7 +158,9 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         return Mage::getSingleton('checkout/type_onepage');
     }
 
-
+    /**
+     * Save and process order
+     */
     public function saveOrderAction()
     {
         Mage::getSingleton('checkout/session')->unsOneclickOrderId();
@@ -182,7 +187,6 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         }
 
         $order = $this->_saveOrderInfo($data);
-//add comment to customer phone... save order if id
         if ($helper->isSaveMagentoOrder()) {
             $this->_saveMagentoOrder();
         }
@@ -208,6 +212,9 @@ class Smasoft_Oneclickorder_IndexController extends Mage_Core_Controller_Front_A
         ));
     }
 
+    /**
+     * Success page
+     */
     public function successAction()
     {
         if (!Mage::getSingleton('checkout/session')->getOneclickOrderId()) {
