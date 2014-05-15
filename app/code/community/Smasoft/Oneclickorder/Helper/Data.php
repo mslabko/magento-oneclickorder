@@ -21,9 +21,11 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_EMAIL = 'smasoft_oneclickorder/general/email';
     const XML_PATH_CHANGE_ONEPAGE_CHECKOUT = 'smasoft_oneclickorder/checkout/change_onepage';
     const XML_PATH_ALLOW_COUNTRIES = 'smasoft_oneclickorder/general/allow_countries';
+    const XML_PATH_DISPLAY_PHONE_IN_SALES_ORDERS = 'smasoft_oneclickorder/general/display_phone_in_sales_orders';
 
     /**
      * Is OneClick Order functionality enabled
+     *
      * @return bool
      */
     public function isEnabled()
@@ -32,7 +34,8 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * change onepage checkout with OneClick Order
+     * Change onepage checkout with OneClick Order
+     *
      * @return bool
      */
     public function isChangeOnepageCheckout()
@@ -42,6 +45,7 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * Save OneClick Order in Magento
+     *
      * @return bool
      */
     public function isSaveMagentoOrder()
@@ -49,9 +53,9 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag(self::XML_PATH_CREATE_MAGENTO_ORDER);
     }
 
-
     /**
      * Send email address to admin
+     *
      * @return bool
      */
     public function isSendEmail()
@@ -61,6 +65,7 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * get admin email address for send
+     *
      * @return bool|string
      */
     public function getOrderNotificationEmail()
@@ -96,6 +101,13 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
         return $collection;
     }
 
-
+    /**
+     * Is display phone number in Magento Sales Orders grid Order
+     *
+     * @return bool
+     */
+    public function isDisplayPhoneInSalesOrders()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_DISPLAY_PHONE_IN_SALES_ORDERS);
+    }
 }
-	 

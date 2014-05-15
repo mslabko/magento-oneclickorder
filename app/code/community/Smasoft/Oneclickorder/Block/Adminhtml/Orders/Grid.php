@@ -13,14 +13,10 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-
 class Smasoft_Oneclickorder_Block_Adminhtml_Orders_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-
-
     /**
      * Init Grid default properties
-     *
      */
     public function __construct()
     {
@@ -30,16 +26,18 @@ class Smasoft_Oneclickorder_Block_Adminhtml_Orders_Grid extends Mage_Adminhtml_B
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
-
     }
 
+    /**
+     * @return Smasoft_Oneclickorder_Model_Resource_Order_Collection
+     */
     protected function _prepareCollectionBefore()
     {
         /** @var $collection Smasoft_Oneclickorder_Model_Resource_Order_Collection */
         $collection = Mage::getModel('smasoft_oneclickorder/order')->getCollection();
         $collection->getSelect()->joinLeft(
             array('country' => Mage::getModel('smasoft_oneclickorder/country')->getResource()
-                ->getTable('smasoft_oneclickorder/country')),
+                    ->getTable('smasoft_oneclickorder/country')),
             'country.country_code = main_table.country',
             array('country.country_code', 'country.phone_code')
         );
@@ -49,9 +47,8 @@ class Smasoft_Oneclickorder_Block_Adminhtml_Orders_Grid extends Mage_Adminhtml_B
         return $collection;
     }
 
-
     /**
-     * @return this
+     * @return $this
      */
     protected function _prepareCollection()
     {
@@ -59,7 +56,6 @@ class Smasoft_Oneclickorder_Block_Adminhtml_Orders_Grid extends Mage_Adminhtml_B
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
-
 
     /**
      * Prepare Grid columns
@@ -160,6 +156,4 @@ class Smasoft_Oneclickorder_Block_Adminhtml_Orders_Grid extends Mage_Adminhtml_B
     {
         return $this->getUrl('adminhtml/oneclickorder/grid', array('_current' => true));
     }
-
-
 }

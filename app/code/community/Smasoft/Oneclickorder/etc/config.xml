@@ -60,17 +60,12 @@
             </oneclickorder_read>
         </resources>
         <events>
-            <catalog_controller_product_view> <!-- identifier of the event we want to catch -->
+            <catalog_controller_product_view>
                 <observers>
-                    <smasoft_events> <!-- identifier of the event handler -->
+                    <smasoft_events>
                         <type>model</type>
-                        <!-- class method call type; valid are model, object and singleton -->
                         <class>smasoft_oneclickorder/observer</class>
-                        <!-- observers class alias -->
                         <method>test</method>
-                        <!-- observer's method to be called -->
-                        <args></args>
-                        <!-- additional arguments passed to observer -->
                     </smasoft_events>
                 </observers>
             </catalog_controller_product_view>
@@ -158,6 +153,26 @@
                 </Smasoft_Oneclickorder>
             </modules>
         </translate>
+        <events>
+            <sales_order_grid_collection_load_before>
+                <observers>
+                    <sales_grid_phone_append>
+                        <type>model</type>
+                        <class>Smasoft_Oneclickorder_Model_Observer</class>
+                        <method>addPhoneColumnToSalesCollection</method>
+                    </sales_grid_phone_append>
+                </observers>
+            </sales_order_grid_collection_load_before>
+            <adminhtml_block_html_before>
+                <observers>
+                    <sales_grid_phone_append>
+                        <type>model</type>
+                        <class>Smasoft_Oneclickorder_Model_Observer</class>
+                        <method>addPhoneColumnToSalesGrid</method>
+                    </sales_grid_phone_append>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
     </adminhtml>
 
     <admin>
@@ -181,6 +196,7 @@
                 <send_email>0</send_email>
                 <template_admin>smasoft_oneclickorder_general_template_admin</template_admin>
                 <allow_countries>US,GB,UA,RU</allow_countries>
+                <display_phone_in_sales_orders>0</display_phone_in_sales_orders>
             </general>
             <checkout>
                 <change_onepage>0</change_onepage>

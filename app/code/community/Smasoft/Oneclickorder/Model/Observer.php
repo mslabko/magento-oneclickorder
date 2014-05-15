@@ -15,7 +15,6 @@
 
 class Smasoft_Oneclickorder_Model_Observer
 {
-
     /**
      * @return Smasoft_Oneclickorder_Helper_Data
      */
@@ -27,6 +26,7 @@ class Smasoft_Oneclickorder_Model_Observer
     /**
      * @dispatch checkout_type_onepage_save_order_after
      * @param Varien_Event_Observer $observer
+     * @return $this
      */
     public function saveMagentoOrderId(Varien_Event_Observer $observer)
     {
@@ -44,7 +44,7 @@ class Smasoft_Oneclickorder_Model_Observer
     /**
      * Change standard OnePage checkout with One Click Order checkout
      * @param Varien_Event_Observer $observer
-     * @return Smasoft_Oneclickorder_Model_Observer
+     * @return $this
      */
     public function changeOnepageCheckout(Varien_Event_Observer $observer)
     {
@@ -76,6 +76,49 @@ class Smasoft_Oneclickorder_Model_Observer
                 }
 
                 break;
+        }
+        return $this;
+    }
+
+    /**
+     * @param Varien_Event_Observer $observer
+     * @return $this
+     */
+    public function addPhoneColumnToSalesCollection(Varien_Event_Observer $observer)
+    {
+        if ($this->_helper()->isDisplayPhoneInSalesOrders()) {
+            $collection = $observer->getEvent()->getOrderGridCollection();
+            $collection->getSelect()->joinLeft(
+                array('smasoft_orders' => $collection->getTable('smasoft_oneclickorder/order')),
+                'smasoft_orders.magento_order_id=main_table.entity_id'
+            );
+        }
+        return $this;
+    }
+
+    /**
+     * @param Varien_Event_Observer $observer
+     * @return $this
+     */
+    public function addPhoneColumnToSalesGrid(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Adminhtml_Block_Widget_Grid $block */
+        $block = $observer->getEvent()->getBlock();
+        if (!isset($block)) {
+            return $this;
+        }
+
+        if ($block->getType() == 'adminhtml/sales_order_grid' && $this->_helper()->isDisplayPhoneInSalesOrders()) {
+            $block->addColumnAfter('customer_phone',
+                array(
+                    'header' => $this->_helper()->__('Customer Phone'),
+                    'type' => 'text',
+                    'index' => 'phone',
+                    'filter_index' => 'smasoft_orders.phone'
+                ),
+                'shipping_name'
+            );
+            $block->sortColumnsByOrder();
         }
         return $this;
     }
