@@ -90,7 +90,8 @@ class Smasoft_Oneclickorder_Model_Observer
             $collection = $observer->getEvent()->getOrderGridCollection();
             $collection->getSelect()->joinLeft(
                 array('smasoft_orders' => $collection->getTable('smasoft_oneclickorder/order')),
-                'smasoft_orders.magento_order_id=main_table.entity_id'
+                'smasoft_orders.magento_order_id=main_table.entity_id',
+                'phone'
             );
         }
         return $this;
