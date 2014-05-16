@@ -24,6 +24,11 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_DISPLAY_PHONE_IN_SALES_ORDERS = 'smasoft_oneclickorder/general/display_phone_in_sales_orders';
 
     /**
+     * @var array
+     */
+    protected $phoneCodes = array();
+
+    /**
      * Is OneClick Order functionality enabled
      *
      * @return bool
@@ -99,6 +104,29 @@ class Smasoft_Oneclickorder_Helper_Data extends Mage_Core_Helper_Abstract
         $collection->addFieldToFilter('country_code', array('in' => $this->getAllowCountries()));
         $collection->setOrder('main_table.order', Varien_Data_Collection::SORT_ORDER_ASC);
         return $collection;
+    }
+
+    /**
+     * @param string $countryCode
+     * @return string
+     */
+    public function getPhoneCodeByCountry($countryCode)
+    {
+        if (!isset($this->phoneCodes[$countryCode])) {
+            $phoneCode = Mage::getModel('smasoft_oneclickorder/country')->load($countryCode, 'country_code');
+            $this->phoneCodes[$countryCode] = $phoneCode->getPhoneCode();
+        }
+        return '+' . $this->phoneCodes[$countryCode];
+    }
+
+    /**
+     * @param int $magentoOrderId
+     * @return string
+     */
+    public function getPhoneNumberByOrder($magentoOrderId)
+    {
+        $order = Mage::getModel('smasoft_oneclickorder/order')->load($magentoOrderId, 'magento_order_id');
+        return $order->getId() ? $this->getPhoneCodeByCountry($order->getCountry()) . $order->getPhone() : '';
     }
 
     /**

@@ -31,4 +31,9 @@
         </reference>
     </adminhtml_oneclickorder_view>
 
+    <adminhtml_sales_order_view>
+        <reference name="left">
+            <block type="smasoft_oneclickorder/adminhtml_sales_order_view" name="oneclickorder_phone_number" template="smasoft/sales/order/phone.phtml" after="order_info"/>
+        </reference>
+    </adminhtml_sales_order_view>
 </layout>

@@ -24,3 +24,5 @@
 "One Click Order Checkout Settings","Настройки оформления заказа в 1 клик."
 "Total items","Total items"
 "Controls whether create Magento Order if possible.","Если включено, то будет сохранен заказ в Magento"
+"Phone number","Номер телефона"
+"Customer Phone","Номер телефона"

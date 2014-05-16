@@ -1,0 +1,4 @@
+<script type="text/javascript">
+    var billingAddressElement= $$('.head-billing-address')[0].up(2).select('fieldset')[0];
+    billingAddressElement.insert('<customerphone><?php echo $this->__('Phone number')?>: <?php echo $this->getPhoneNumber()?></customerphone>')
+</script>

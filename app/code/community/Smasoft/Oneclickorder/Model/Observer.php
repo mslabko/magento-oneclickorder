@@ -91,7 +91,7 @@ class Smasoft_Oneclickorder_Model_Observer
             $collection->getSelect()->joinLeft(
                 array('smasoft_orders' => $collection->getTable('smasoft_oneclickorder/order')),
                 'smasoft_orders.magento_order_id=main_table.entity_id',
-                'phone'
+                array('phone', 'country')
             );
         }
         return $this;
@@ -115,12 +115,21 @@ class Smasoft_Oneclickorder_Model_Observer
                     'header' => $this->_helper()->__('Customer Phone'),
                     'type' => 'text',
                     'index' => 'phone',
-                    'filter_index' => 'smasoft_orders.phone'
+                    'filter_index' => 'smasoft_orders.phone',
+                    'frame_callback' => array($this, 'decoratePhoneColumnInSalesGrid'),
                 ),
                 'shipping_name'
             );
             $block->sortColumnsByOrder();
         }
         return $this;
+    }
+
+    /**
+     * Decorator for phone column in sales grid
+     */
+    public function decoratePhoneColumnInSalesGrid($value, $row, $column, $isExport)
+    {
+        return $value ? $this->_helper()->getPhoneCodeByCountry($row->getCountry()) . $value : '';
     }
 }
